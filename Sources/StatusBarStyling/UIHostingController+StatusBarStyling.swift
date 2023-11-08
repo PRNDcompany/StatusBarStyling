@@ -1,9 +1,4 @@
-//
-//  UIHostingController+StatusBarStyling.swift
-//  
-//
-//  Created by PRND on 2023/01/12.
-//
+//  Copyright © 2023 PRND. All rights reserved.
 
 import SwiftUI
 
@@ -56,7 +51,7 @@ private extension UIViewController {
     }
     
     func findInChildren() -> UIViewController? {
-        guard let viewController = children.lazy.first(where: { $0 is StatusBarStylingViewController }) else {
+        guard let viewController = children.lazy.first(where: { $0 is StatusBarStyleControllable }) else {
             return children.lazy.compactMap { $0.findStatusBarStylingViewController() }.first
         }
         return viewController
@@ -64,7 +59,7 @@ private extension UIViewController {
     
     var targetController: UIViewController? {
         switch self {
-        case is UINavigationController, is UITabBarController, is StatusBarStylingViewController:
+        case is UINavigationController, is UITabBarController:
             return self
         default:
             return nil

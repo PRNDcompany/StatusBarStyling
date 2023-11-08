@@ -1,9 +1,4 @@
-//
-//  UINavigationController+StatusBarStyling.swift
-//  
-//
-//  Created by PRND on 2023/01/12.
-//
+//  Copyright © 2023 PRND. All rights reserved.
 
 import UIKit
 

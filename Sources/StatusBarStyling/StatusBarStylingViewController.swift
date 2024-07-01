@@ -22,6 +22,14 @@ final class StatusBarStylingViewController: UIViewController, StatusBarStyleCont
         setNeedsStatusBarAppearanceUpdateToTopParent()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        topParent?.setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    weak var topParent: UIViewController?
+    
     var statusBarStyle: UIStatusBarStyle {
         didSet {
             setNeedsStatusBarAppearanceUpdateToTopParent()
@@ -35,7 +43,10 @@ final class StatusBarStylingViewController: UIViewController, StatusBarStyleCont
     }
     
     func setNeedsStatusBarAppearanceUpdateToTopParent() {
-        topParent().setNeedsStatusBarAppearanceUpdate()
+        let topParent = topParent()
+        guard topParent != self else { return }
+        self.topParent = topParent
+        topParent.setNeedsStatusBarAppearanceUpdate()
     }
     
     required init(statusBarStyle: UIStatusBarStyle, statusBarHidden: Bool) {

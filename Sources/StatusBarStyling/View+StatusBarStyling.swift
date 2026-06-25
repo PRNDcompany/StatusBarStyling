@@ -4,8 +4,14 @@ import SwiftUI
 
 
 extension View {
+    @ViewBuilder
     public func statusBar(style: UIStatusBarStyle, hidden: Bool = false) -> some View {
-        inject(StatusBarStylingView(statusBarStyle: style, statusBarHidden: hidden))
+        // iOS 26부터는 시스템이 status bar 색상을 자동으로 처리하므로 VC를 주입하지 않는다.
+        if #unavailable(iOS 26.0) {
+            inject(StatusBarStylingView(statusBarStyle: style, statusBarHidden: hidden))
+        } else {
+            self
+        }
     }
 }
 
